@@ -1,14 +1,30 @@
+// models/OrderItem.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
-const Product = require('./Product');
 const Order = require('./Order');
+const Product = require('./Product');
 
 const OrderItem = sequelize.define('OrderItem', {
-    quantity: { type: DataTypes.INTEGER, allowNull: false }
+    orderId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Order,
+            key: 'id'
+        }
+    },
+    productId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Product,
+            key: 'id'
+        }
+    },
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    }
 });
-
-
-Order.belongsToMany(Product, { through: OrderItem });
-Product.belongsToMany(Order, { through: OrderItem });
 
 module.exports = OrderItem;
