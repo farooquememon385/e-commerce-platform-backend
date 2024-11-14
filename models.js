@@ -1,8 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('ecommerce_backend', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
-});
+const sequelize = require('./db');
 
 const User = sequelize.define('User', {
     username: { type: DataTypes.STRING, unique: true, allowNull: false },
